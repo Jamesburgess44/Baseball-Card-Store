@@ -12,12 +12,13 @@ namespace eCommerceStarterCode.Data
         {
 
         }
-
+        // Creating a new table for Merch
+        public DbSet<Merch> Merches { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new RolesConfiguration());
+         //   modelBuilder.ApplyConfiguration(new RolesConfiguration());
         }
 
     }
