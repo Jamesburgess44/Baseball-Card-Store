@@ -14,12 +14,26 @@ namespace eCommerceStarterCode.Data
         }
         // Creating a new table for Merch
         public DbSet<Merch> Merches { get; set; }
+
+        // Creating a Joint Table for our Shopping Cart
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-         //   modelBuilder.ApplyConfiguration(new RolesConfiguration());
+            //   modelBuilder.ApplyConfiguration(new RolesConfiguration());
+            modelBuilder.Entity<ShoppingCart>()
+                   .HasKey(bc => new { bc.UserId, bc.MerchId });
+            modelBuilder.Entity<ShoppingCart>()
+                .HasOne(bc => bc.User)
+                .WithMany(b => b.ShoppingCarts)
+                .HasForeignKey(bc => bc.UserId);
+            modelBuilder.Entity<ShoppingCart>()
+                .HasOne(bc => bc.Merch)
+                .WithMany(c => c.ShoppingCarts)
+                .HasForeignKey(bc => bc.MerchId);
         }
+       
 
     }
 }
