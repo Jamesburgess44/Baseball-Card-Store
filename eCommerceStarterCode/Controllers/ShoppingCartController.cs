@@ -46,7 +46,18 @@ namespace eCommerceStarterCode.Controllers
             _context.SaveChanges();
             return StatusCode(201, value);
         }
-
+        [HttpDelete("{MerchId}")]
+        public IActionResult Remove(int MerchId)
+        {
+            var deleteProduct = _context.ShoppingCarts.Where(dp => dp.MerchId == MerchId).SingleOrDefault();
+            if (deleteProduct == null)
+            {
+                return NotFound();
+            }
+            _context.ShoppingCarts.Remove(deleteProduct);
+            _context.SaveChanges();
+            return Ok(deleteProduct);
+        }
         //add by merchId
 
 
