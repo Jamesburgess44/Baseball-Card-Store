@@ -31,5 +31,17 @@ namespace eCommerceStarterCode.Controllers
             }
             return Ok(user);
         }
+        // get merch by id, is working in postman
+        [HttpGet("merches/{id}")]
+        public IActionResult GetMerchById(int id)
+        {
+            var merch = _context.Merches.Find(id);
+            if (merch == null)
+            {
+                return NotFound();
+            }
+            return Ok(merch);
+        }
+        // HttpPost to post merch to table 
     }
 }
