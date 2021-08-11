@@ -36,7 +36,7 @@ namespace eCommerceStarterCode.Controllers
             var result = await _userManager.CreateAsync(user, userForRegistration.Password);
             if (!result.Succeeded)
             {
-                foreach(var error in result.Errors)
+                foreach (var error in result.Errors)
                 {
                     ModelState.TryAddModelError(error.Code, error.Description);
                 }
@@ -50,32 +50,12 @@ namespace eCommerceStarterCode.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
         {
-            if(!await _authManager.ValidateUser(user))
+            if (!await _authManager.ValidateUser(user))
             {
                 return Unauthorized();
             }
 
             return Ok(new { Token = await _authManager.CreateToken() });
         }
-        [HttpGet("merches/{id}")]
-        public IActionResult GetMerchById(int id)
-        {
-            var merch = _context.Merches.Find(id);
-            if (merch == null)
-            {
-                return NotFound();
-            }
-            return Ok(merch);
-        }
-        [HttpPut("merches/{id}")]
-        public IActionResult UpdateMerch(int id)
-        {
-            var merch = GetMerchById();
-            if
-
-            _context.Products.Update(merch);
-            _context.SaveChanges();
-
-        }
-        }
+    }   
 }

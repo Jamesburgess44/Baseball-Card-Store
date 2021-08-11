@@ -31,9 +31,5 @@ namespace eCommerceStarterCode.Controllers
             }
             return Ok(user);
         }
-        // get merch by id, is working in postman
-       
-       
-        // HttpPost to post merch to table 
     }
 }
