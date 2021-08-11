@@ -38,20 +38,19 @@ namespace eCommerceStarterCode.Controllers
             _context.SaveChanges();
             return StatusCode(201, value);
         }
-        [HttpPut("{id}")]
+        [HttpPatch("{id}")]
         public IActionResult Put(int id, [FromBody]Merch value)
         {
-            var merch = _context.Merches.FirstOrDefault(merch => merch.MerchId == id);
-            merch.Name = value.Name;
-            merch.Category = value.Category;
-            merch.Description = value.Description;
-            merch.Price = value.Price;
+            var merch = _context.Merches.FirstOrDefault(merch => merch.MerchId == id);           
             merch.Review = value.Review;
             merch.Rating = value.Rating;
             _context.SaveChanges();
             return Ok(merch);            
         }
+        //[HttpDelete]
+        //public IActionResult Delete (int id, )
     }
+
    
 }
 
