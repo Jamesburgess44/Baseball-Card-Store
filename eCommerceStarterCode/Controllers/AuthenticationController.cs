@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using eCommerceStarterCode.ActionFilters;
 using eCommerceStarterCode.Contracts;
+using eCommerceStarterCode.Data;
 using eCommerceStarterCode.DataTransferObjects;
 using eCommerceStarterCode.Models;
 using Microsoft.AspNetCore.Identity;
@@ -13,11 +14,13 @@ namespace eCommerceStarterCode.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly IAuthenticationManager _authManager;
-        public AuthenticationController(IMapper mapper, UserManager<User> userManager, IAuthenticationManager authManager)
+        public AuthenticationController(IMapper mapper, UserManager<User> userManager, IAuthenticationManager authManager, ApplicationDbContext context)
         {
+            _context = context;
             _mapper = mapper;
             _userManager = userManager;
             _authManager = authManager;
@@ -54,5 +57,16 @@ namespace eCommerceStarterCode.Controllers
 
             return Ok(new { Token = await _authManager.CreateToken() });
         }
-    }
+        [HttpGet("merches/{id}")]
+        public IActionResult GetMerchById(int id)
+        {
+            var merch = _context.Merches.Find(id);
+            if (merch == null)
+            {
+                return NotFound();
+            }
+            return Ok(merch);
+        }
+
+        }
 }
