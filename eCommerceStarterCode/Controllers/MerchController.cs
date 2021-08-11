@@ -39,16 +39,22 @@ namespace eCommerceStarterCode.Controllers
             return StatusCode(201, value);
         }
         [HttpPatch("{id}")]
-        public IActionResult Put(int id, [FromBody]Merch value)
+        public IActionResult Put(int id, [FromBody] Merch value)
         {
-            var merch = _context.Merches.FirstOrDefault(merch => merch.MerchId == id);           
+            var merch = _context.Merches.FirstOrDefault(merch => merch.MerchId == id);
             merch.Review = value.Review;
             merch.Rating = value.Rating;
             _context.SaveChanges();
-            return Ok(merch);            
+            return Ok(merch);
         }
-        //[HttpDelete]
-        //public IActionResult Delete (int id, )
+        [HttpDelete("{id}")]
+        public IActionResult Remove (int id )
+        {
+            var merch = _context.Merches.Find(id);
+            _context.Merches.Remove(merch);
+            _context.SaveChanges();
+            return Ok(merch);
+        }
     }
 
    
