@@ -67,6 +67,15 @@ namespace eCommerceStarterCode.Controllers
             }
             return Ok(merch);
         }
+        [HttpPut("merches/{id}")]
+        public IActionResult UpdateMerch(int id)
+        {
+            var merch = GetMerchById();
+            if
 
+            _context.Products.Update(merch);
+            _context.SaveChanges();
+
+        }
         }
 }
