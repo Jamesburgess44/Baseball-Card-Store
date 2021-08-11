@@ -9,24 +9,19 @@ namespace eCommerceStarterCode.Controllers
 {
     [Route("api/shoppingcart")]
     [ApiController]
-    public class ShoppingCart : ControllerBase
+    public class ShoppingCartController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public ShoppingCart(ApplicationDbContext context)
+        public ShoppingCartController(ApplicationDbContext context)
         {
             _context = context;
         }
         //Start requests here.
-        public IActionResult YouNameIt()
-        {
-            return View();
-        }
+        //public IActionResult YouNameIt()
+        //{
+        //    return View();
+        //}
     }
 }
 
 
-
-
-public class ExamplesController : ControllerBase
-{
-    
