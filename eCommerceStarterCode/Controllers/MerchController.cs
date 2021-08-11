@@ -1,6 +1,7 @@
 ﻿using eCommerceStarterCode.Data;
 using eCommerceStarterCode.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,15 +30,6 @@ namespace eCommerceStarterCode.Controllers
             }
             return Ok(merch);
         }
-        //[HttpPut("merches/{id}")]
-        //public IActionResult UpdateMerch(int id)
-        //{
-        //    var merch = GetMerchById();
-        //    if
-
-
-        //    _context.Products.Update(merch);
-        //    _context.SaveChanges();
 
         [HttpPost]
         public IActionResult Post([FromBody] Merch value)
@@ -46,7 +38,19 @@ namespace eCommerceStarterCode.Controllers
             _context.SaveChanges();
             return StatusCode(201, value);
         }
-
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody]Merch value)
+        {
+            var merch = _context.Merches.FirstOrDefault(merch => merch.MerchId == id);
+            merch.Name = value.Name;
+            merch.Category = value.Category;
+            merch.Description = value.Description;
+            merch.Price = value.Price;
+            merch.Review = value.Review;
+            merch.Rating = value.Rating;
+            _context.SaveChanges();
+            return Ok(merch);            
+        }
     }
    
 }
