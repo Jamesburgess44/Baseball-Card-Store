@@ -39,11 +39,17 @@ namespace eCommerceStarterCode.Controllers
             }
             return Ok(ShoppingCart);
         }
-
+        [HttpPost]
+        public IActionResult Post([FromBody] ShoppingCart value)
+        {
+            _context.ShoppingCarts.Add(value);
+            _context.SaveChanges();
+            return StatusCode(201, value);
+        }
 
         //add by merchId
 
-   
+
 
         //Start requests here.
         //public IActionResult YouNameIt()
