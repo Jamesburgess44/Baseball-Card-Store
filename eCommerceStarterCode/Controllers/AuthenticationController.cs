@@ -4,8 +4,10 @@ using eCommerceStarterCode.Contracts;
 using eCommerceStarterCode.Data;
 using eCommerceStarterCode.DataTransferObjects;
 using eCommerceStarterCode.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Controllers
@@ -56,6 +58,6 @@ namespace eCommerceStarterCode.Controllers
             }
 
             return Ok(new { Token = await _authManager.CreateToken() });
-        }
-    }   
+        }        
+    }
 }
