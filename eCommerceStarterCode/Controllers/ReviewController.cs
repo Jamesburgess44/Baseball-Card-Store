@@ -12,19 +12,19 @@ namespace eCommerceStarterCode.Controllers
     [ApiController]
     public class ReviewController : ControllerBase
     {
-        //private readonly ApplicationDbContext _context;
-        //public ReviewController(ApplicationDbContext context)
-        //{
-        //    [HttpPost("{id}")]
-        //    public IActionResult Post(int id, [FromBody] Review value)
-        //    {
-        //        var merch = _context.Reviews.FirstOrDefault(merch => merch.MerchId == id);
-        //        re.Review = value.Review;
-        //        merch.Rating = value.Rating;
-        //        _context.SaveChanges();
-        //        return Ok(merch);
-        //    }
-        //}
+    private readonly ApplicationDbContext _context;
+    public ReviewController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        [HttpPost]
+        public IActionResult Post([FromBody] Review value)
+    {
+        _context.Reviews.Add(value);
+        _context.SaveChanges();
+        return StatusCode(201, value);
+    }
+        
 
     }
 }
