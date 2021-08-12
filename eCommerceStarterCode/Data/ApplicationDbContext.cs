@@ -15,7 +15,8 @@ namespace eCommerceStarterCode.Data
 
         // Creating a Joint Table for our Shopping Cart
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
-        
+        public DbSet<Review> Reviews { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -31,25 +32,22 @@ namespace eCommerceStarterCode.Data
                 .HasOne(bc => bc.Merch)
                 .WithMany(c => c.ShoppingCarts)
                 .HasForeignKey(bc => bc.MerchId);
-        }
-        //public DbSet<Review> Reviews { get; set; }
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
+            {
+            base.OnModelCreating(modelBuilder);
 
-        //    modelBuilder.Entity<Review>()
-        //        .HasKey(bc => new { bc.UserId, bc.MerchId });
-        //    modelBuilder.Entity<Review>()
-        //        .HasOne(bc => bc.User)
-        //        .WithMany(b => b.Reviews)
-        //        .HasForeignKey(bc => bc.UserId);
-        //    modelBuilder.Entity<Review>()
-        //        .HasOne(bc => bc.Merch)
-        //        .WithMany(c => c.Reviews)
-        //        .HasForeignKey(bc => bc.MerchId);
+            modelBuilder.Entity<Review>()
+                .HasKey(bc => new { bc.UserId, bc.MerchId });
+            modelBuilder.Entity<Review>()
+                .HasOne(bc => bc.User)
+                .WithMany(b => b.Reviews)
+                .HasForeignKey(bc => bc.UserId);
+            modelBuilder.Entity<Review>()
+                .HasOne(bc => bc.Merch)
+                .WithMany(c => c.Reviews)
+                .HasForeignKey(bc => bc.MerchId);
 
-        //}
-       
+            }
+     }
 
     }
 }
