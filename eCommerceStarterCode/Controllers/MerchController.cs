@@ -47,15 +47,15 @@ namespace eCommerceStarterCode.Controllers
             return StatusCode(201, value);
         }
         // update merch by id TESTED
-        [HttpPatch("{id}")]
-        public IActionResult Put(int id, [FromBody] Merch value)
-        {
-            var merch = _context.Merches.FirstOrDefault(merch => merch.MerchId == id);
-            merch.Review = value.Review;
-            merch.Rating = value.Rating;
-            _context.SaveChanges();
-            return Ok(merch);
-        }
+        //[HttpPatch("{id}")]
+        //public IActionResult Put(int id, [FromBody] Merch value)
+        //{
+        //    var merch = _context.Merches.FirstOrDefault(merch => merch.MerchId == id);
+        //    merch.Review = value.Review;
+        //    merch.Rating = value.Rating;
+        //    _context.SaveChanges();
+        //    return Ok(merch);
+        //}
         // delete merch by id TESTED 
         [HttpDelete("{id}")]
         public IActionResult Remove (int id )

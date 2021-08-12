@@ -169,12 +169,6 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Review")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("MerchId");
 
                     b.ToTable("Merches");
