@@ -13,6 +13,5 @@ namespace eCommerceStarterCode.Models
         public Merch Merch { get; set; }
         public string UserReview { get; set; }
         public int Rating { get; set; }
-        public ICollection<Review> Reviews { get; set; }
     }
 }
