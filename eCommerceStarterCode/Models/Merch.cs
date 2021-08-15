@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eCommerceStarterCode.Models
 {
@@ -14,5 +15,9 @@ namespace eCommerceStarterCode.Models
         public double Price { get; set; }
         public ICollection<ShoppingCart> ShoppingCarts { get; set; }
         public ICollection<Review> Reviews { get; set; }
+
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public User User { get; set; }
     }
 }

@@ -21,7 +21,8 @@ namespace eCommerceStarterCode.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            //   modelBuilder.ApplyConfiguration(new RolesConfiguration());
+            modelBuilder.ApplyConfiguration(new RolesConfiguration());
+
             modelBuilder.Entity<ShoppingCart>()
                    .HasKey(bc => new { bc.UserId, bc.MerchId });
             modelBuilder.Entity<ShoppingCart>()
@@ -45,7 +46,6 @@ namespace eCommerceStarterCode.Data
                 .HasOne(bc => bc.Merch)
                 .WithMany(c => c.Reviews)
                 .HasForeignKey(bc => bc.MerchId);
-
             }
      }
 
