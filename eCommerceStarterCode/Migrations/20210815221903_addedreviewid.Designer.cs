@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerceStarterCode.Data;
 
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210815221903_addedreviewid")]
+    partial class addedreviewid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ce50c102-43e6-4c11-94fb-a9a92df6bcd9",
-                            ConcurrencyStamp = "255316fd-f6d9-4efb-b8dd-53aaa7d29289",
+                            Id = "f47cacab-9b84-46c2-9c5b-54ffa2fdaf01",
+                            ConcurrencyStamp = "95b64bd5-0064-4563-9ce8-f6c6dac8238f",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "a98ad73b-c7f5-4f69-bd54-c9b293f4eb31",
-                            ConcurrencyStamp = "8d28aded-642a-4649-879e-31e8d8318445",
+                            Id = "ce86c0f2-6774-4537-97d4-d0b2a148062b",
+                            ConcurrencyStamp = "c0159f35-dc85-43c1-9bd5-d3b81d331eb4",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -204,6 +206,9 @@ namespace eCommerceStarterCode.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReviewId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserReview")

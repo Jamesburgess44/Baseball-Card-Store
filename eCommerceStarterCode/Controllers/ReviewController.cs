@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eCommerceStarterCode.Controllers
 {
@@ -17,9 +19,11 @@ namespace eCommerceStarterCode.Controllers
         {
             _context = context;
         }
-        [HttpPost]
+        [HttpPost, Authorize]
         public IActionResult Post([FromBody] Review value)
     {
+        var userId = User.FindFirstValue("id");
+        value.UserId = userId;
         _context.Reviews.Add(value);
         _context.SaveChanges();
         return StatusCode(201, value);
