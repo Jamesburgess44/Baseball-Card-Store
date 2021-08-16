@@ -28,7 +28,22 @@ namespace eCommerceStarterCode.Controllers
         _context.SaveChanges();
         return StatusCode(201, value);
     }
-        
-
+        [HttpGet("{merchid}")]
+        public IActionResult GetReviewById(int merchId)
+        {
+            var merchid = merchId;
+            var review = _context.Reviews.Find(merchId);
+            if (review == null)
+            {
+                return NotFound();
+            }
+            return Ok(review);
+        }
+        [HttpGet]
+        public IActionResult GetAllReviews()
+        {
+            var reviews = _context.Reviews;
+            return Ok(reviews);
+        }
     }
 }
