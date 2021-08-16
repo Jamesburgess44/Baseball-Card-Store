@@ -8,7 +8,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace eCommerceStarterCode.Models
 {
     public class ShoppingCart
-    {
+    {   
+        public int ShoppingCartId { get; set; }
+
         [ForeignKey("User")]
         public string UserId { get; set; }
         public User User { get; set; }
