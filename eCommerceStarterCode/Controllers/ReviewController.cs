@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerceStarterCode.Controllers
 {
@@ -31,13 +32,13 @@ namespace eCommerceStarterCode.Controllers
         [HttpGet("{merchid}")]
         public IActionResult GetReviewById(int merchId)
         {
-            var merchid = merchId;
-            var review = _context.Reviews.Find(merchId);
-            if (review == null)
+            var reviews = _context.Reviews.Where(r => r.MerchId == merchId).Include(r => r.User).Include(r => r.Merch).
+                 Select(r => new { merchId = r.MerchId, name = r.Merch.Name, userId = r.UserId, rating = r.Rating, userreview = r.UserReview, userName = r.User.UserName });
+            if (reviews == null)
             {
                 return NotFound();
             }
-            return Ok(review);
+            return Ok(reviews);
         }
         [HttpGet]
         public IActionResult GetAllReviews()
