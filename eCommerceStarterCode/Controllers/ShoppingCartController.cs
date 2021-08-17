@@ -47,9 +47,17 @@ namespace eCommerceStarterCode.Controllers
         {
             var userId = User.FindFirstValue("id");
             value.UserId = userId;
-            _context.ShoppingCarts.Add(value);
-            _context.SaveChanges();
-            return StatusCode(201, value);
+            try
+            {
+                _context.ShoppingCarts.Add(value);
+                _context.SaveChanges();
+                return StatusCode(201, value);
+            }
+            catch
+            { 
+                return StatusCode(400, value); 
+            }
+                        
         }
         [HttpDelete("{MerchId}/{UserId}")]
         public IActionResult Remove(int MerchId, string UserId)
