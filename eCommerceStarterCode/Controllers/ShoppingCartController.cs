@@ -2,6 +2,7 @@
 using eCommerceStarterCode.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,16 +32,16 @@ namespace eCommerceStarterCode.Controllers
         //}
 
 
-        [HttpGet("{UserId}")]
-        public IActionResult GetShoppingCartByUserId(string UserId)
-        {
-            var ShoppingCart = _context.ShoppingCarts.Where(sc =>sc.UserId==UserId);          
-            if (ShoppingCart == null)
-            {
-                return NotFound();
-            }
-            return Ok(ShoppingCart);
-        }
+        //[HttpGet("{UserId}")]
+        //public IActionResult GetShoppingCartByUserId(string UserId)
+        //{
+        //    var ShoppingCart = _context.ShoppingCarts.Where(sc =>sc.UserId==UserId);          
+        //    if (ShoppingCart == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(ShoppingCart);
+        //}
         [HttpPost, Authorize]
         public IActionResult Post([FromBody] ShoppingCart value)
         {
@@ -62,6 +63,19 @@ namespace eCommerceStarterCode.Controllers
             _context.SaveChanges();
             return Ok(deleteProduct);
         }
+        [HttpGet(), Authorize]
+        public IActionResult GetUserCart()
+        {
+            var userId = User.FindFirstValue("id");
+            var userCart = _context.ShoppingCarts.Include(uc => uc.Merch).ThenInclude(ac => ac.User).Where(uc => uc.UserId == userId).ToList().
+                Select(e => new { merchName = e.Merch.Name, merchPrice = e.Merch.Price });
+            if (userCart == null)
+            {
+                return NotFound();
+            }
+            return Ok(userCart);
+        }
+
         //add by merchId
 
 
